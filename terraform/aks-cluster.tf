@@ -11,6 +11,13 @@ resource "azurerm_resource_group" "default" {
   }
 }
 
+resource "azurerm_container_registry" "default" {
+  name                = "jentischallengeacr"
+  resource_group_name = azurerm_resource_group.default.name
+  location            = azurerm_resource_group.default.location
+  sku                 = "Premium"
+}
+
 resource "azurerm_kubernetes_cluster" "default" {
   name                = "jentis-challenge-aks"
   location            = azurerm_resource_group.default.location
@@ -35,4 +42,5 @@ resource "azurerm_kubernetes_cluster" "default" {
   tags = {
     environment = "Demo"
   }
+
 }
